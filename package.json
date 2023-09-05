@@ -1,21 +1,46 @@
 {
-  "name": "nuxt-app",
+  "name": "cardinal",
+  "type": "module",
   "private": true,
+  "packageManager": "pnpm@8.7.1",
+  "author": "LoTwT <l709937065@gmail.com>",
   "scripts": {
-    "build": "nuxt build",
     "dev": "nuxt dev",
+    "build": "nuxt build",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
-    "tauri": "tauri"
-  },
-  "devDependencies": {
-    "@nuxt/devtools": "latest",
-    "nuxt": "^3.7.0",
-    "@tauri-apps/cli": "^1.4.0"
-
+    "tauri": "tauri",
+    "lint": "eslint .",
+    "prettier": "prettier --write .",
+    "prepare": "simple-git-hooks",
+    "up": "taze latest -I"
   },
   "dependencies": {
     "@tauri-apps/api": "^1.4.0"
-  }
+  },
+  "devDependencies": {
+    "@ayingott/eslint-config": "^0.5.3",
+    "@ayingott/prettier-config": "^0.1.1",
+    "@nuxt/devtools": "latest",
+    "@tauri-apps/cli": "^1.4.0",
+    "eslint": "^8.48.0",
+    "lint-staged": "^14.0.1",
+    "nuxt": "^3.7.0",
+    "pnpm": "^8.7.1",
+    "prettier": "^3.0.3",
+    "simple-git-hooks": "^2.9.0",
+    "taze": "^0.11.2",
+    "typescript": "^5.2.2"
+  },
+  "simple-git-hooks": {
+    "pre-commit": "pnpm exec lint-staged"
+  },
+  "lint-staged": {
+    "*": [
+      "eslint --fix",
+      "prettier --write --ignore-unknown"
+    ]
+  },
+  "prettier": "@ayingott/prettier-config"
 }
