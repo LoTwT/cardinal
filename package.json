@@ -1,45 +1,58 @@
 {
   "name": "cardinal",
-  "type": "module",
+  "version": "0.0.0",
   "private": true,
-  "packageManager": "pnpm@8.7.1",
-  "author": "LoTwT <l709937065@gmail.com>",
+  "license": "MIT",
+  "keywords": [
+    "electron",
+    "rollup",
+    "vite",
+    "vue3",
+    "vue"
+  ],
+  "main": "dist-electron/main/index.js",
+  "debug": {
+    "env": {
+      "VITE_DEV_SERVER_URL": "http://127.0.0.1:3344/"
+    }
+  },
   "scripts": {
-    "dev": "tauri dev",
-    "nuxt:dev": "nuxt dev",
-    "build": "nuxt build",
-    "generate": "nuxt generate",
-    "preview": "nuxt preview",
-    "postinstall": "nuxt prepare",
-    "tauri": "tauri",
-    "lint": "eslint .",
-    "prettier": "prettier --write .",
+    "build": "vue-tsc --noEmit && vite build && electron-builder",
+    "dev": "vite",
+    "lint": "pnpm run lint:base .",
+    "lint:base": "ESLINT_USE_FLAT_CONFIG=true eslint -c eslint.config.mjs",
     "prepare": "simple-git-hooks",
+    "prepublishOnly": "pnpm build",
+    "prettier": "prettier --write .",
+    "preview": "vite preview",
+    "release": "bumpp && pnpm publish",
     "up": "taze latest -I"
   },
-  "dependencies": {
-    "@tauri-apps/api": "^1.4.0"
-  },
   "devDependencies": {
-    "@ayingott/eslint-config": "^0.5.3",
-    "@ayingott/prettier-config": "^0.1.1",
-    "@nuxt/devtools": "latest",
-    "@tauri-apps/cli": "^1.4.0",
-    "eslint": "^8.48.0",
+    "@ayingott/eslint-config": "^0.6.3",
+    "@ayingott/prettier-config": "^0.1.2",
+    "@vitejs/plugin-vue": "^4.3.4",
+    "bumpp": "^9.2.0",
+    "electron": "^26.0.0",
+    "electron-builder": "^24.6.3",
+    "eslint": "^8.49.0",
     "lint-staged": "^14.0.1",
-    "nuxt": "^3.7.0",
-    "pnpm": "^8.7.1",
     "prettier": "^3.0.3",
     "simple-git-hooks": "^2.9.0",
     "taze": "^0.11.2",
-    "typescript": "^5.2.2"
+    "typescript": "^5.1.6",
+    "vite": "^4.4.9",
+    "vite-plugin-electron": "^0.14.0",
+    "vite-plugin-electron-renderer": "^0.14.5",
+    "vue": "^3.3.4",
+    "vue-tsc": "^1.8.8"
   },
   "simple-git-hooks": {
     "pre-commit": "pnpm exec lint-staged"
   },
   "lint-staged": {
     "*": [
-      "eslint --fix",
+      "pnpm run lint:base --fix",
       "prettier --write --ignore-unknown"
     ]
   },
