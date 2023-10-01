@@ -29,7 +29,7 @@
     "up": "taze latest -I"
   },
   "devDependencies": {
-    "@ayingott/eslint-config": "^0.6.3",
+    "@ayingott/eslint-config": "^0.7.0",
     "@ayingott/prettier-config": "^0.1.2",
     "@vitejs/plugin-vue": "^4.3.4",
     "bumpp": "^9.2.0",
